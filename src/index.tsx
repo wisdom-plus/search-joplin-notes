@@ -6,27 +6,26 @@ export default function Command() {
   const [searchText, setSearchText] = useState("");
   const [result, setResult] = useState<joplinjson>();
 
-  type joplinjson = { items: [{ id: string; tile: string; body: string }] };
+  type data = { id: string; title: string; body: string };
+  type joplinjson = { items: data[] };
 
-  const fetchdata = fetch(
-    "http://localhost:41184/notes?token=0598ef0e76d6a114110b90e61fe90d02aeda313a639d686226dfb236172c79b75be66e976855e1a92dcb5a5492a15008d4ec07faafb16db39259df699d5ad840",
-    { method: "GET" }
-  );
+  const fetchdata = (): Promise<joplinjson> =>
+    fetch(
+      "http://localhost:41184/notes?token=0598ef0e76d6a114110b90e61fe90d02aeda313a639d686226dfb236172c79b75be66e976855e1a92dcb5a5492a15008d4ec07faafb16db39259df699d5ad840",
+      { method: "GET" }
+    ).then((res) => res.json() as Promise<joplinjson>);
+
   useEffect(() => {
     if (searchText) {
-      fetchdata
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
+      fetchdata().then((data) => {
+        setResult(() => data);
+      });
     }
   }, [searchText]);
 
   return (
     <List searchBarPlaceholder="Search keywords" onSearchTextChange={setSearchText}>
-      {searchText && (
-        <>
-          <List.Item
+      {/* <List.Item
             icon="list-icon.png"
             title="Greeting"
             actions={
@@ -34,10 +33,10 @@ export default function Command() {
                 <Action.Push title="Show Details" target={<Detail markdown="# Hey! 👋" />} />
               </ActionPanel>
             }
-          />
-          <List.Item icon="list-icon.png" title={searchText} />
-        </>
-      )}
+          /> */}
+      {result?.items.map((data) => (
+        <List.Item icon="list-icon.png" title={data.title} key={data.id} />
+      ))}
     </List>
   );
 }
