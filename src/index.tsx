@@ -11,7 +11,7 @@ export default function Command() {
 
   const fetchdata = (keyword: string): Promise<joplinjson> =>
     fetch(
-      `http://localhost:41184/search?query=${keyword}*&token=0598ef0e76d6a114110b90e61fe90d02aeda313a639d686226dfb236172c79b75be66e976855e1a92dcb5a5492a15008d4ec07faafb16db39259df699d5ad840`,
+      `http://localhost:41184/search?query=${keyword}*&fields=id,title,body&token=0598ef0e76d6a114110b90e61fe90d02aeda313a639d686226dfb236172c79b75be66e976855e1a92dcb5a5492a15008d4ec07faafb16db39259df699d5ad840`,
       { method: "GET" }
     ).then((res) => res.json() as Promise<joplinjson>);
 
