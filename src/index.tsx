@@ -25,17 +25,17 @@ export default function Command() {
 
   return (
     <List searchBarPlaceholder="Search keywords" onSearchTextChange={setSearchText}>
-      {/* <List.Item
-            icon="list-icon.png"
-            title="Greeting"
-            actions={
-              <ActionPanel>
-                <Action.Push title="Show Details" target={<Detail markdown="# Hey! 👋" />} />
-              </ActionPanel>
-            }
-          /> */}
       {result?.items.map((data) => (
-        <List.Item icon="list-icon.png" title={data.title} key={data.id} />
+        <List.Item
+          icon="list-icon.png"
+          title={data.title}
+          key={data.id}
+          actions={
+            <ActionPanel>
+              <Action.Push title={data.title} target={<Detail markdown={data.body} />} />
+            </ActionPanel>
+          }
+        />
       ))}
     </List>
   );
