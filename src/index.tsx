@@ -1,13 +1,21 @@
-import { ActionPanel, Detail, List, Action } from "@raycast/api";
+import { ActionPanel, Detail, List, Action, getApplications } from "@raycast/api";
 import { useState, useEffect } from "react";
 import fetch from "node-fetch";
 
 export default function Command() {
   const [searchText, setSearchText] = useState("");
   const [result, setResult] = useState<joplinjson>();
+  const [apppath, setApppath] = useState<string>("");
 
   type data = { id: string; title: string; body: string };
   type joplinjson = { items: data[] };
+
+  useEffect(() => {
+    getApplications().then((res) => {
+      const path = res.filter((app) => app.bundleId === "net.cozic.joplin-desktop")[0].path;
+      setApppath(() => path);
+    });
+  }, []);
 
   const fetchdata = (keyword: string): Promise<joplinjson> =>
     fetch(
@@ -32,7 +40,19 @@ export default function Command() {
           key={data.id}
           actions={
             <ActionPanel>
-              <Action.Push title={data.title} target={<Detail markdown={data.body} />} />
+              <Action.Push
+                title={data.title}
+                target={
+                  <Detail
+                    markdown={data.body}
+                    actions={
+                      <ActionPanel>
+                        <Action.Open title="Open Note" target={apppath} />
+                      </ActionPanel>
+                    }
+                  />
+                }
+              />
             </ActionPanel>
           }
         />
