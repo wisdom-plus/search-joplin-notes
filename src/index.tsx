@@ -1,4 +1,4 @@
-import { ActionPanel, Detail, List, Action, getApplications } from "@raycast/api";
+import { ActionPanel, Detail, List, Action, getApplications, open } from "@raycast/api";
 import { useState, useEffect } from "react";
 import fetch from "node-fetch";
 
@@ -14,6 +14,7 @@ export default function Command() {
     getApplications().then((res) => {
       const path = res.filter((app) => app.bundleId === "net.cozic.joplin-desktop")[0].path;
       setApppath(() => path);
+      open(path);
     });
   }, []);
 
