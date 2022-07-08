@@ -6,7 +6,7 @@
   "icon": "command-icon.png",
   "author": "tomoron",
   "categories": [
-    "Web"
+    "Application"
   ],
   "license": "MIT",
   "commands": [
@@ -15,6 +15,16 @@
       "title": "search joplin notes",
       "description": "Template for showing a static list and a detail view",
       "mode": "view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "joplin_token",
+      "type": "password",
+      "tile": "Joplin Token",
+      "required": true,
+      "description": "You can get this token from the Joplin desktop application, on the Web Clipper Options screen.",
+      "placeholder": "Joplin Token"
     }
   ],
   "dependencies": {
