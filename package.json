@@ -6,7 +6,7 @@
   "icon": "command-icon.png",
   "author": "tomoron",
   "categories": [
-    "Application"
+    "Applications"
   ],
   "license": "MIT",
   "commands": [
@@ -21,7 +21,7 @@
     {
       "name": "joplin_token",
       "type": "password",
-      "tile": "Joplin Token",
+      "title": "Joplin Token",
       "required": true,
       "description": "You can get this token from the Joplin desktop application, on the Web Clipper Options screen.",
       "placeholder": "Joplin Token"
