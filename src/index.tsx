@@ -1,6 +1,7 @@
-import { ActionPanel, Detail, List, Action, getApplications, open, getPreferenceValues } from "@raycast/api";
+import { ActionPanel, Detail, List, Action, getApplications, getPreferenceValues } from "@raycast/api";
 import { useState, useEffect } from "react";
 import fetch from "node-fetch";
+import { runAppleScript, runAppleScriptSync } from "run-appleScript";
 
 export default function Command() {
   const [searchText, setSearchText] = useState("");
@@ -16,8 +17,8 @@ export default function Command() {
     getApplications().then((res) => {
       const path = res.filter((app) => app.bundleId === "net.cozic.joplin-desktop")[0].path;
       setApppath(() => path);
-      open(path);
     });
+    runAppleScript('tell application "Joplin" to activate').then(() => console.log("Joplin is running"));
   }, []);
 
   const fetchdata = (keyword: string): Promise<joplinjson> =>
