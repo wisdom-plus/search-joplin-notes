@@ -18,6 +18,11 @@ export default function Command() {
       const path = res.filter((app) => app.bundleId === "net.cozic.joplin-desktop")[0].path;
       setApppath(() => path);
     });
+    // runAppleScriptSync(
+    //   `tell application "System Events"
+    //   set background only of processes suite "Joplin" to true
+    //   end tell`
+    // );
     runAppleScript('tell application "Joplin" to activate').then(() => console.log("Joplin is running"));
   }, []);
 
