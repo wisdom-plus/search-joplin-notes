@@ -1,7 +1,9 @@
 import fetch from "node-fetch";
+import { API_URL } from "./constants";
 
-export const fetchdata = (keyword: string, token: string) => {
-  fetch(`http://localhost:41184/search?query=${keyword}*&fields=id,title,body&token=${token}`, {
-    method: "GET",
-  });
+export const fetchdata = (keyword: string) => {
+  fetch(API_URL(keyword)),
+    {
+      method: "GET",
+    };
 };
