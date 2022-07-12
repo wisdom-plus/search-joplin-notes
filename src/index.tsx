@@ -22,6 +22,10 @@ export default function Command() {
     runAppleScriptSync(`
     if application "Joplin" is not running then
       tell application "Joplin" to run
+      delay 2.5
+      tell application "System Events"
+      set visible of process "Joplin" to false
+      end tell
     end if`);
   }, []);
 
