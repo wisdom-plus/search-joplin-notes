@@ -24,7 +24,11 @@ export default function Command() {
     //   set background only of processes suite "Joplin" to true
     //   end tell`
     // );
-    runAppleScriptSync(`tell application "Joplin" to activate`);
+    runAppleScriptSync(`
+    if application "Joplin" is running
+    else
+      tell application "Joplin" to activate
+    end if`);
   }, []);
 
   const fetchdata = (keyword: string): Promise<joplinjson> =>
