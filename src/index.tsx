@@ -1,7 +1,8 @@
-import { ActionPanel, Detail, List, Action, getApplications, getPreferenceValues } from "@raycast/api";
+import { List, getApplications, getPreferenceValues } from "@raycast/api";
 import { useState, useEffect } from "react";
 import fetch from "node-fetch";
-import { runAppleScript, runAppleScriptSync } from "run-appleScript";
+import { runAppleScriptSync } from "run-appleScript";
+import { NotesList } from "./components/NotesList";
 
 export default function Command() {
   const [searchText, setSearchText] = useState("");
@@ -23,7 +24,7 @@ export default function Command() {
     //   set background only of processes suite "Joplin" to true
     //   end tell`
     // );
-    runAppleScript('tell application "Joplin" to activate').then(() => console.log("Joplin is running"));
+    runAppleScriptSync(`tell application "Joplin" to activate`);
   }, []);
 
   const fetchdata = (keyword: string): Promise<joplinjson> =>
@@ -42,28 +43,7 @@ export default function Command() {
   return (
     <List searchBarPlaceholder="Search keywords" onSearchTextChange={setSearchText}>
       {result?.items.map((data) => (
-        <List.Item
-          icon="list-icon.png"
-          title={data.title}
-          key={data.id}
-          actions={
-            <ActionPanel>
-              <Action.Push
-                title={data.title}
-                target={
-                  <Detail
-                    markdown={data.body}
-                    actions={
-                      <ActionPanel>
-                        <Action.Open title="Open Note" target={apppath} />
-                      </ActionPanel>
-                    }
-                  />
-                }
-              />
-            </ActionPanel>
-          }
-        />
+        <NotesList data={data} path={apppath} key={data.id} />
       ))}
     </List>
   );
