@@ -22,7 +22,7 @@ export default function Command() {
   }, [searchText]);
 
   return (
-    <List searchBarPlaceholder="Search keywords" onSearchTextChange={setSearchText}>
+    <List searchBarPlaceholder="Search keywords" onSearchTextChange={setSearchText} isLoading={result === undefined}>
       {result?.items.map((data) => (
         <NotesList data={data} path={path} key={data.id} />
       ))}
