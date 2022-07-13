@@ -1,5 +1,5 @@
 import { runAppleScriptSync } from "run-applescript";
-import { JoplinBundleId } from "./constants";
+import { RaycastBundleId } from "./constants";
 
 export const openJoplin = () =>
   runAppleScriptSync(`
@@ -9,5 +9,5 @@ if application "Joplin" is not running then
   tell application "System Events"
     set visible of process "Joplin" to false
   end tell
-  do shell script "open -b ${JoplinBundleId}"
+  do shell script "open -b ${RaycastBundleId}"
 end if`);
