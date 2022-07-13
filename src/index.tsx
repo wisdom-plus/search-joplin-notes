@@ -13,15 +13,15 @@ export default function Command() {
 
   useEffect(() => {
     if (searchText) {
-      try {
-        fetchnotes(searchText).then((data) => setResult(() => data));
-      } catch (error) {
-        showToast({
-          style: Toast.Style.Failure,
-          title: "Failure to fetch notes",
-          message: "Please make sure Joplin is running",
+      fetchnotes(searchText)
+        .then((data) => setResult(() => data))
+        .catch(() => {
+          showToast({
+            style: Toast.Style.Failure,
+            title: "Failure to fetch notes",
+            message: "Please make sure Joplin is running",
+          });
         });
-      }
     }
   }, [searchText]);
 

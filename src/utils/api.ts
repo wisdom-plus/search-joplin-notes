@@ -7,7 +7,7 @@ export const fetchnotes = (keyword: string) => {
     if (res.ok) {
       return res.json() as Promise<NoteData>;
     } else {
-      throw new Error("Error fetching notes");
+      throw new Error(res.statusText);
     }
   });
   return response;
