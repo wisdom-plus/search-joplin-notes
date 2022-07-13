@@ -1,7 +1,6 @@
 import { List, getApplications, getPreferenceValues } from "@raycast/api";
 import { useState, useEffect } from "react";
 import fetch from "node-fetch";
-import { runAppleScriptSync } from "run-appleScript";
 import { NotesList } from "./components/NotesList";
 import { openJoplin } from "./utils/applescripts";
 
