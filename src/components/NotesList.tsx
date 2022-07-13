@@ -1,4 +1,5 @@
-import { ActionPanel, List, Action, Detail } from "@raycast/api";
+import { ActionPanel, List, Action } from "@raycast/api";
+import { NoteDetail } from "./NoteDetail";
 import type { data } from "../utils/types";
 
 type Props = { data: data; path: string };
@@ -9,19 +10,7 @@ export const NotesList = ({ data, path }: Props) => (
     title={data.title}
     actions={
       <ActionPanel>
-        <Action.Push
-          title={data.title}
-          target={
-            <Detail
-              markdown={data.body}
-              actions={
-                <ActionPanel>
-                  <Action.Open title="Open Note" target={path} />
-                </ActionPanel>
-              }
-            />
-          }
-        />
+        <Action.Push title={data.title} target={<NoteDetail content={data.body} path={path} />} />
       </ActionPanel>
     }
   />
