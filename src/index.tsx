@@ -1,8 +1,8 @@
 import { List, getApplications, getPreferenceValues } from "@raycast/api";
 import { useState, useEffect } from "react";
-import fetch from "node-fetch";
 import { NotesList } from "./components/NotesList";
 import { openJoplin } from "./utils/applescripts";
+import { fetchnotes } from "./utils/api";
 
 export default function Command() {
   const [searchText, setSearchText] = useState("");
@@ -22,14 +22,9 @@ export default function Command() {
     openJoplin();
   }, []);
 
-  const fetchdata = (keyword: string): Promise<joplinjson> =>
-    fetch(`http://localhost:41184/search?query=${keyword}*&fields=id,title,body&token=${token}`, {
-      method: "GET",
-    }).then((res) => res.json() as Promise<joplinjson>);
-
   useEffect(() => {
     if (searchText) {
-      fetchdata(searchText).then((data) => {
+      fetchnotes(searchText).then((data) => {
         setResult(() => data);
       });
     }
