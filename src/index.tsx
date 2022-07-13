@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import fetch from "node-fetch";
 import { runAppleScriptSync } from "run-appleScript";
 import { NotesList } from "./components/NotesList";
+import { openJoplin } from "./utils/applescripts";
 
 export default function Command() {
   const [searchText, setSearchText] = useState("");
@@ -19,15 +20,7 @@ export default function Command() {
       const path = res.filter((app) => app.bundleId === "net.cozic.joplin-desktop")[0].path;
       setApppath(() => path);
     });
-    runAppleScriptSync(`
-    if application "Joplin" is not running then
-      tell application "Joplin" to run
-      delay 2.5
-      tell application "System Events"
-        set visible of process "Joplin" to false
-      end tell
-      do shell script "open -b com.raycast.macos"
-    end if`);
+    openJoplin();
   }, []);
 
   const fetchdata = (keyword: string): Promise<joplinjson> =>
