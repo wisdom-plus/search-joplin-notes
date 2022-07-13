@@ -8,6 +8,7 @@ import { useGetPath } from "./utils/usegetpath";
 export default function Command() {
   const [searchText, setSearchText] = useState("");
   const [result, setResult] = useState<NoteData>();
+  const [error, setError] = useState<Error>();
 
   const path = useGetPath();
 
@@ -16,6 +17,7 @@ export default function Command() {
       fetchnotes(searchText)
         .then((data) => setResult(() => data))
         .catch((error) => {
+          setError(() => error);
           showToast({
             style: Toast.Style.Failure,
             title: "Failure to fetch notes",
@@ -26,10 +28,20 @@ export default function Command() {
   }, [searchText]);
 
   return (
-    <List searchBarPlaceholder="Search keywords" onSearchTextChange={setSearchText} isLoading={result === undefined}>
-      {result?.items.map((data) => (
-        <NotesList data={data} path={path} key={data.id} />
-      ))}
-    </List>
+    <>
+      {error ? (
+        <Detail markdown={`# ${error.message}`} />
+      ) : (
+        <List
+          searchBarPlaceholder="Search keywords"
+          onSearchTextChange={setSearchText}
+          isLoading={result === undefined}
+        >
+          {result?.items.map((data) => (
+            <NotesList data={data} path={path} key={data.id} />
+          ))}
+        </List>
+      )}
+    </>
   );
 }
