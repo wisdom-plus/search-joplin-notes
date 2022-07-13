@@ -1,4 +1,4 @@
-import { List } from "@raycast/api";
+import { List, showToast, Toast } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { NotesList } from "./components/NotesList";
 import { fetchnotes } from "./utils/api";
@@ -15,8 +15,12 @@ export default function Command() {
     if (searchText) {
       try {
         fetchnotes(searchText).then((data) => setResult(() => data));
-      } catch {
-        console.log("error");
+      } catch (error) {
+        showToast({
+          style: Toast.Style.Failure,
+          title: "Failure to fetch notes",
+          message: "Please make sure Joplin is running",
+        });
       }
     }
   }, [searchText]);
