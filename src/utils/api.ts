@@ -1,10 +1,14 @@
 import fetch from "node-fetch";
 import { API_URL } from "./constants";
-import type { notedata } from "./types";
+import type { NoteData } from "./types";
 
-export const fetchnotes = async (keyword: string) => {
-  const response = await fetch(API_URL(keyword), { method: "GET" });
-  if (response.ok) {
-    return response.json() as Promise<notedata>;
-  }
+export const fetchnotes = (keyword: string) => {
+  const response = fetch(API_URL(keyword), { method: "GET" }).then((res) => {
+    if (res.ok) {
+      return res.json() as Promise<NoteData>;
+    } else {
+      throw new Error("Error fetching notes");
+    }
+  });
+  return response;
 };

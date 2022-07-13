@@ -13,8 +13,11 @@ export default function Command() {
 
   useEffect(() => {
     if (searchText) {
-      const notes = fetchnotes(searchText);
-      setResult(() => notes);
+      try {
+        fetchnotes(searchText).then((data) => setResult(() => data));
+      } catch {
+        console.log("error");
+      }
     }
   }, [searchText]);
 
