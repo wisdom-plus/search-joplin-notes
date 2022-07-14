@@ -3,7 +3,7 @@
   "name": "search-joplin-notes",
   "title": "search joplin notes",
   "description": "search and view in your joplin notes",
-  "icon": "command-icon.png",
+  "icon": "Joplin-icon.svg",
   "author": "tomoron",
   "categories": [
     "Applications"
