@@ -1,4 +1,4 @@
-import { ActionPanel, List, Action } from "@raycast/api";
+import { ActionPanel, List, Action, Icon, Color } from "@raycast/api";
 import { NoteDetail } from "./NoteDetail";
 import type { data } from "../utils/types";
 
@@ -6,7 +6,7 @@ type Props = { data: data; path: string };
 
 export const NotesList = ({ data, path }: Props) => (
   <List.Item
-    icon="list-icon.png"
+    icon={{ source: Icon.List, tintColor: Color.Blue }}
     title={data.title}
     actions={
       <ActionPanel>
