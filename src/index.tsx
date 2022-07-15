@@ -12,18 +12,23 @@ export default function Command() {
 
   const path = useGetPath();
 
+  const fetch = async (keyword: string) => {
+    try {
+      const result = await fetchnotes(keyword);
+      setResult(() => result);
+    } catch (error) {
+      setError(() => error as Error);
+      showToast({
+        style: Toast.Style.Failure,
+        title: "Failure to fetch notes",
+        message: "Please make sure Joplin is running",
+      });
+    }
+  };
+
   useEffect(() => {
     if (searchText) {
-      fetchnotes(searchText)
-        .then((data) => setResult(() => data))
-        .catch((error) => {
-          setError(() => error);
-          showToast({
-            style: Toast.Style.Failure,
-            title: "Failure to fetch notes",
-            message: "Please make sure Joplin is running",
-          });
-        });
+      fetch(searchText);
     }
   }, [searchText]);
 
