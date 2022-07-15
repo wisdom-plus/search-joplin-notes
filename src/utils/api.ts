@@ -3,15 +3,12 @@ import { API_URL } from "./constants";
 import type { NoteData } from "./types";
 
 export const fetchnotes = async (keyword: string) => {
-  console.log(API_URL("test"));
-  const response = fetch(await API_URL(keyword), { method: "GET" }).then((res) => {
-    if (res.ok) {
-      return res.json() as Promise<NoteData>;
-    } else {
-      throw new Error("Error fetching notes");
-    }
-  });
-  return response;
+  const url = await API_URL(keyword);
+  const response = await fetch(url, { method: "GET" });
+  if (!response.ok) {
+    throw new Error("Unable to fetch notes");
+  }
+  return (await response.json()) as NoteData;
 };
 
 export const pingjoplin = async () => {
