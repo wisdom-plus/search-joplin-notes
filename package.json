@@ -13,7 +13,7 @@
     {
       "name": "index",
       "title": "search joplin notes",
-      "description": "Template for showing a static list and a detail view",
+      "description": "search joplin notes",
       "mode": "view"
     }
   ],
