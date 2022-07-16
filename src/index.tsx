@@ -27,7 +27,9 @@ export default function Command() {
   };
 
   useEffect(() => {
-    if (searchText) {
+    if (searchText === "") {
+      setResult(() => undefined);
+    } else {
       fetch(searchText);
     }
   }, [searchText]);
