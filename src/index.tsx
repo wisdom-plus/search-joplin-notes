@@ -37,11 +37,7 @@ export default function Command() {
       {error ? (
         <Detail markdown={`# ${error.message}`} />
       ) : (
-        <List
-          searchBarPlaceholder="Search keywords"
-          onSearchTextChange={setSearchText}
-          isLoading={result === undefined}
-        >
+        <List searchBarPlaceholder="Search keywords" onSearchTextChange={setSearchText} isLoading={searchText === ""}>
           {result?.items.map((data) => (
             <NotesList data={data} path={path} key={data.id} />
           ))}
