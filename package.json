@@ -3,22 +3,34 @@
   "name": "search-joplin-notes",
   "title": "search joplin notes",
   "description": "search and view in your joplin notes",
-  "icon": "command-icon.png",
+  "icon": "Joplin-icon.svg",
   "author": "tomoron",
   "categories": [
-    "Web"
+    "Applications"
   ],
   "license": "MIT",
   "commands": [
     {
       "name": "index",
       "title": "search joplin notes",
-      "description": "Template for showing a static list and a detail view",
+      "description": "search joplin notes",
       "mode": "view"
     }
   ],
+  "preferences": [
+    {
+      "name": "joplin_token",
+      "type": "password",
+      "title": "Joplin Token",
+      "required": true,
+      "description": "You can get this token from the Joplin desktop application, on the Web Clipper Options screen.",
+      "placeholder": "Joplin Token"
+    }
+  ],
   "dependencies": {
-    "@raycast/api": "^1.37.1"
+    "@raycast/api": "^1.37.1",
+    "node-fetch": "^3.2.6",
+    "run-applescript": "^6.0.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.0.0",
