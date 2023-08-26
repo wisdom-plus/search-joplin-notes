@@ -12,9 +12,9 @@ export const fetchnotes = async (keyword: string) => {
 };
 
 export const pingjoplin = async () => {
-  const port = { port: 41184 };
+  const port = { port: 41183 };
   for (let portToTest = 41183; portToTest <= 41194; portToTest++) {
-    const result = await fetch(`http://localhost:${portToTest}/ping`, { method: "GET" })
+    const result = await fetch(`http://127.0.0.1:${portToTest}/ping`, { method: "GET" })
       .then((res) => {
         if (!res.ok && res.body === null) {
           throw new Error("Error pinging Joplin");
