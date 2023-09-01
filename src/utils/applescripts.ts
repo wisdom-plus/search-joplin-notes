@@ -1,8 +1,8 @@
-import { runAppleScriptSync } from "run-applescript";
+import { runAppleScript } from "@raycast/utils";
 import { RaycastBundleId } from "./constants";
 
-export const openJoplin = () =>
-  runAppleScriptSync(`
+export const openJoplin = async () =>
+  await runAppleScript(`
 if application "Joplin" is not running then
   tell application "Joplin" to run
   delay 2.5
