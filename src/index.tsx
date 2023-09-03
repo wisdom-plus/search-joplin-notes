@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 import { NotesList } from "./components/NotesList";
 import { fetchnotes } from "./utils/api";
 import { NoteData } from "./utils/types";
-import { useGetPath } from "./utils/usegetpath";
+import { useGetPath, usePingJoplin } from "./utils/hooks";
 
 export default function Command() {
   const [searchText, setSearchText] = useState("");
   const [result, setResult] = useState<NoteData>();
   const [error, setError] = useState<Error>();
+  
+  usePingJoplin()
 
   const path = useGetPath();
 
