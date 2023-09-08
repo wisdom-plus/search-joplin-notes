@@ -1,9 +1,10 @@
 import { getApplications } from "@raycast/api";
-import { useCachedState } from '@raycast/utils';
+import { useCachedState, useFetch } from "@raycast/utils";
 import { useEffect, useState } from "react";
 import { openJoplin } from "./applescripts";
-import { JoplinBundleId } from "./constants";
-import type { CacheData } from './types';
+import { pingjoplin } from "./api";
+import { JoplinBundleId, API_URL } from "./constants";
+import type { CacheData } from "./types";
 
 export const useGetPath = () => {
   const [path, setPath] = useState("");
@@ -20,15 +21,25 @@ export const useGetPath = () => {
 };
 
 export const usePingJoplin = () => {
-  const [port, setPort] = useCachedState<CacheData>('port', { cached: false, port: 41183 })
+  const [port, setPort] = useCachedState<CacheData>("port", { cached: false, port: 41183 });
 
-  useEffect(()=> {
-    if (!port.cached){
-      console.log('test')
-      setPort((prev)=>({ ...prev,cached: true, port: 41184}))
+  useEffect(() => {
+    if (!port.cached) {
+      (async () => {
+        const pingPort = await pingjoplin();
+        setPort((prev) => ({ ...prev, cached: true, port: pingPort }));
+      })();
     }
-  }, [port])
-
+  }, []);
 
   return port;
-}
+};
+
+export const useNoteFetch = (keyword: string) => {
+  const { port } = usePingJoplin();
+  const URL = API_URL(keyword, port);
+  const { isLoading, data, error } = useFetch(URL, { keepPreviousDate: true });
+  const dataj = data;
+  const errorj = error;
+  return { isLoading, dataj, errorj };
+};

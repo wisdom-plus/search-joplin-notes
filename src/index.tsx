@@ -3,20 +3,24 @@ import { useState, useEffect } from "react";
 import { NotesList } from "./components/NotesList";
 import { fetchnotes } from "./utils/api";
 import { NoteData } from "./utils/types";
-import { useGetPath, usePingJoplin } from "./utils/hooks";
+import { useGetPath, usePingJoplin, useNoteFetch } from "./utils/hooks";
 
 export default function Command() {
   const [searchText, setSearchText] = useState("");
   const [result, setResult] = useState<NoteData>();
   const [error, setError] = useState<Error>();
-  
-  usePingJoplin()
+
+  const port = usePingJoplin();
+  const { isLoading, dataj, errorj } = useNoteFetch("test");
+  console.log(isLoading);
+  console.log(dataj);
+  console.log(errorj);
 
   const path = useGetPath();
 
   const fetch = async (keyword: string) => {
     try {
-      const result = await fetchnotes(keyword);
+      const result = await fetchnotes(keyword, port.port);
       setResult(() => result);
     } catch (error) {
       setError(() => error as Error);
@@ -39,12 +43,10 @@ export default function Command() {
   return (
     <>
       {error ? (
-        <Detail markdown={`# ${error.message}`} />
+        <Detail isLoading={isLoading} markdown={`# ${error.message}`} />
       ) : (
         <List searchBarPlaceholder="Search keywords" onSearchTextChange={setSearchText} isLoading={searchText === ""}>
-          {result?.items.map((data) => (
-            <NotesList data={data} path={path} key={data.id} />
-          ))}
+          {result?.items.map((data) => <NotesList data={data} path={path} key={data.id} />)}
         </List>
       )}
     </>
