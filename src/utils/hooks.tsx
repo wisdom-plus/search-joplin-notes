@@ -39,7 +39,6 @@ export const useNoteFetch = (keyword: string) => {
   const { port } = usePingJoplin();
   const URL = API_URL(keyword, port);
   const { isLoading, data, error } = useFetch(URL, { keepPreviousDate: true });
-  const dataj = data;
-  const errorj = error;
-  return { isLoading, dataj, errorj };
+
+  return { isLoading, data, error };
 };

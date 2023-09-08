@@ -1,14 +1,17 @@
 import { Detail, Action, ActionPanel } from "@raycast/api";
+import { useGetPath } from "../utils/hooks";
 
-type Props = { content: string; path: string };
+export const NoteDetail = ({ content }: { content: string }) => {
+  const path = useGetPath();
 
-export const NoteDetail = ({ content, path }: Props) => (
-  <Detail
-    markdown={content}
-    actions={
-      <ActionPanel>
-        <Action.Open title="Open Note" target={path} />
-      </ActionPanel>
-    }
-  />
-);
+  return (
+    <Detail
+      markdown={content}
+      actions={
+        <ActionPanel>
+          <Action.Open title="Open Note" target={path} />
+        </ActionPanel>
+      }
+    />
+  );
+};
