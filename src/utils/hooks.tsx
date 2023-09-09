@@ -1,23 +1,21 @@
-import { getApplications } from "@raycast/api";
+import { showToast, Toast, getApplications } from "@raycast/api";
 import { useCachedState, useFetch } from "@raycast/utils";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { openJoplin } from "./applescripts";
 import { pingjoplin } from "./api";
 import { JoplinBundleId, API_URL } from "./constants";
 import type { CacheData } from "./types";
 
 export const useGetPath = () => {
-  const [path, setPath] = useState("");
+  const [, setPath] = useCachedState("path", { cached: false, path: null });
 
   useEffect(() => {
     getApplications().then((res) => {
       const joplinpath = res.filter((app) => app.bundleId === JoplinBundleId)[0].path;
-      setPath(() => joplinpath);
+      setPath((prev) => ({ ...prev, cached: true, path: joplinpath }));
     });
     openJoplin();
   }, []);
-
-  return path;
 };
 
 export const usePingJoplin = () => {
@@ -38,7 +36,15 @@ export const usePingJoplin = () => {
 export const useNoteFetch = (keyword: string) => {
   const { port } = usePingJoplin();
   const URL = API_URL(keyword, port);
-  const { isLoading, data, error } = useFetch(URL, { keepPreviousDate: true });
+  const { isLoading, data, error } = useFetch(URL, {
+    keepPreviousDate: true,
+    onError: () =>
+      showToast({
+        style: Toast.Style.Failure,
+        title: "Error: Not fetch notes",
+        message: "Unable to communicate with server",
+      }),
+  });
 
   return { isLoading, data, error };
 };

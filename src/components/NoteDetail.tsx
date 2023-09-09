@@ -1,8 +1,8 @@
 import { Detail, Action, ActionPanel } from "@raycast/api";
-import { useGetPath } from "../utils/hooks";
+import { useCachedState } from "@raycast/utils";
 
 export const NoteDetail = ({ content }: { content: string }) => {
-  const path = useGetPath();
+  const { path } = useCachedState("path");
 
   return (
     <Detail
