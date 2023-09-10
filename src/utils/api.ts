@@ -1,15 +1,4 @@
 import fetch from "node-fetch";
-import { API_URL } from "./constants";
-import type { NoteData } from "./types";
-
-export const fetchnotes = async (keyword: string) => {
-  const url = await API_URL(keyword);
-  const response = await fetch(url, { method: "GET" });
-  if (!response.ok) {
-    throw new Error("Unable to fetch notes");
-  }
-  return (await response.json()) as NoteData;
-};
 
 export const pingjoplin = async () => {
   const port = { port: 41183 };
