@@ -1,7 +1,6 @@
 import { showToast, Toast, getApplications } from "@raycast/api";
 import { useCachedState, useFetch } from "@raycast/utils";
 import { useEffect } from "react";
-import { openJoplin } from "./applescripts";
 import { pingjoplin } from "./api";
 import { JoplinBundleId, API_URL } from "./constants";
 import type { CacheData } from "./types";
@@ -14,7 +13,6 @@ export const useGetPath = () => {
       const joplinpath = res.filter((app) => app.bundleId === JoplinBundleId)[0].path;
       setPath((prev) => ({ ...prev, cached: true, path: joplinpath }));
     });
-    openJoplin();
   }, []);
 };
 
@@ -42,7 +40,7 @@ export const useNoteFetch = (keyword: string) => {
       showToast({
         style: Toast.Style.Failure,
         title: "Error: Not fetch notes",
-        message: "Unable to communicate with server",
+        message: "Unable to communicate with joplin server",
       }),
   });
 
