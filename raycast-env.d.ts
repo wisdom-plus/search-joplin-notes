@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
 type ExtensionPreferences = {
-  /** Joplin Token - You can get this token from the Joplin desktop application, on the Web Clipper Options screen. */
+  /** Joplin Auth Token - You can get this token from the Joplin desktop application, on the Web Clipper Options screen. */
   "joplin_token": string
 }
 

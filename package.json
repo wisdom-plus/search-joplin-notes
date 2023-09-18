@@ -4,7 +4,7 @@
   "title": "Search Joplin Notes",
   "description": "search and view in your joplin notes",
   "icon": "Joplin_icon.png",
-  "author": "tomoron",
+  "author": "wisdom-plus",
   "categories": [
     "Applications"
   ],
@@ -13,7 +13,7 @@
     {
       "name": "index",
       "title": "Search Joplin Notes",
-      "description": "search joplin notes",
+      "description": "search notes in joplin",
       "mode": "view"
     }
   ],
@@ -21,7 +21,7 @@
     {
       "name": "joplin_token",
       "type": "password",
-      "title": "Joplin Token",
+      "title": "Joplin Auth Token",
       "required": true,
       "description": "You can get this token from the Joplin desktop application, on the Web Clipper Options screen.",
       "placeholder": "Joplin Token"
