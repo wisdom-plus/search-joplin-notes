@@ -34,16 +34,18 @@ export const usePingJoplin = () => {
 };
 
 export const useNoteFetch = (keyword: string) => {
-  const { port } = usePingJoplin();
-  const URL = API_URL(keyword, port);
+  const [port, setPort] = useCachedState("port");
+  const URL = API_URL(keyword, port.port);
   const { isLoading, data, error } = useFetch(URL, {
     keepPreviousDate: true,
-    onError: () =>
+    onError: () => (
+      setPort((prev) => ({ ...prev, cached: false, port: null })),
       showToast({
         style: Toast.Style.Failure,
         title: "Error: Not fetch notes",
         message: "Unable to communicate with joplin server",
-      }),
+      })
+    ),
   });
 
   return { isLoading, data, error };
