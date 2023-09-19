@@ -6,21 +6,23 @@ import { JoplinBundleId, API_URL } from "./constants";
 import type { CacheData } from "./types";
 
 export const useGetPath = () => {
-  const [, setPath] = useCachedState("path", { cached: false, path: null });
+  const [path, setPath] = useCachedState("path", { cached: false, path: null });
 
   useEffect(() => {
-    getApplications().then((res) => {
-      const joplinpath = res.filter((app) => app.bundleId === JoplinBundleId)[0].path;
-      setPath((prev) => ({ ...prev, cached: true, path: joplinpath }));
-    });
+    if (!path.cached || path.path == null) {
+      getApplications().then((res) => {
+        const joplinpath = res.filter((app) => app.bundleId === JoplinBundleId)[0].path;
+        setPath((prev) => ({ ...prev, cached: true, path: joplinpath }));
+      });
+    }
   }, []);
 };
 
 export const usePingJoplin = () => {
-  const [port, setPort] = useCachedState<CacheData>("port", { cached: false, port: 41183 });
+  const [port, setPort] = useCachedState<CacheData>("port", { cached: false, port: null });
 
   useEffect(() => {
-    if (!port.cached) {
+    if (!port.cached || port.port == null) {
       (async () => {
         const pingPort = await pingjoplin();
         setPort((prev) => ({ ...prev, cached: true, port: pingPort }));
