@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
 export const pingjoplin = async () => {
-  const port = { port: 41183 };
+  const port = { port: null };
   for (let portToTest = 41183; portToTest <= 41194; portToTest++) {
     const result = await fetch(`http://127.0.0.1:${portToTest}/ping`, { method: "GET" })
       .then((res) => {
