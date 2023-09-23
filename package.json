@@ -6,7 +6,9 @@
   "icon": "Joplin_icon.png",
   "author": "wisdom-plus",
   "categories": [
-    "Applications"
+    "Applications",
+    "Productivity",
+    "Documentation"
   ],
   "license": "MIT",
   "commands": [
