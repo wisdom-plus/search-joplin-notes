@@ -6,7 +6,9 @@
   "icon": "Joplin_icon.png",
   "author": "wisdom-plus",
   "categories": [
-    "Applications"
+    "Applications",
+    "Productivity",
+    "Documentation"
   ],
   "license": "MIT",
   "commands": [
@@ -28,8 +30,8 @@
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.57.2",
-    "@raycast/utils": "^1.9.1",
+    "@raycast/api": "^1.59.0",
+    "@raycast/utils": "^1.10.0",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
