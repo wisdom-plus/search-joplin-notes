@@ -6,7 +6,7 @@ type Props = { id: string };
 export const NoteDetail = (props: Props) => {
   const { id } = props;
   const { isLoading, data } = useNoteDetailFetch(id);
-  const url = `joplin://x-callback-url/openNote?id=${id}` 
+  const url = `joplin://x-callback-url/openNote?id=${id}`;
 
   return (
     <Detail
