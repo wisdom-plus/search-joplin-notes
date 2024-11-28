@@ -1,5 +1,9 @@
 # search joplin notes Changelog
 
+## [FIX Codes] - 2024-11-29
+
+Fix "Open Note" action to use redirect_url
+
 ## [FIX Codes] - 2024-9-21
 
 Modify it so that the search results can be changed in the settings
