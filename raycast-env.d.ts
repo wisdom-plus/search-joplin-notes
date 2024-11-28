@@ -11,7 +11,7 @@ type ExtensionPreferences = {
   /** Joplin Auth Token - You can get this token from the Joplin desktop application, on the Web Clipper Options screen. */
   "joplin_token": string,
   /** Search Display Limit - The number of notes to display in the search results. Default is 9. */
-  "search_limit": "3" | "6" | "9" | "12"
+  "search_limit": "6" | "9" | "12" | "18"
 }
 
 /** Preferences accessible in all the extension's commands */
