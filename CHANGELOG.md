@@ -2,7 +2,7 @@
 
 ## [FIX Codes] - 2024-11-29
 
-Fix "Open Note" action to use redirect_url
+BUGFix "Open Note" action to use redirect_url 
 
 ## [FIX Codes] - 2024-9-21
 
