@@ -1,5 +1,9 @@
 # Search joplin notes Changelog
 
+## [Update Package] - 2026-01-21
+
+Update package
+
 ## [FIX Codes] - 2024-11-29
 
 BUGFix "Open Note" action to use redirect_url 
